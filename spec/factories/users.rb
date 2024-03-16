@@ -1,4 +1,15 @@
+# spec/factories/users.rb
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.email }
+    password { "Testtest1@" }
+    status { :active }
+    country_code { "+20" }
+    phone_number { "10" + Faker::Number.number(digits: 8).to_s }
+    name { Faker::Name.name }
 
+  end
+end
 
 # == Schema Information
 #

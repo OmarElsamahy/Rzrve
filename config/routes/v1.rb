@@ -2,4 +2,5 @@
 
 namespace :v1 do
   draw :auth
+  draw :profile
 end

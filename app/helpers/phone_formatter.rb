@@ -12,7 +12,7 @@ module PhoneFormatter
     else
       raise ExceptionHandler::BadRequest.new(error: "invalid_phone_number")
     end
-  rescue => exception
+  rescue
     raise ExceptionHandler::BadRequest.new(error: "invalid_phone_number")
   end
 end
