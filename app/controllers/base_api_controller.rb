@@ -3,17 +3,19 @@
 class BaseApiController < ApplicationController
   include Api::V1::Lookups::LookupsSetters
   include ResponseHelper
-  include ExceptionHandler
+  include ExceptionHandler::RescueFrom
   include JsonWebToken
   include ParamsHelper
   include Authorization
 
+  skip_before_action :verify_authenticity_token
   before_action :set_time_zone
   around_action :use_time_zone
+  before_action :validate_request_format
   before_action :authorize_request
   before_action :authorize_action!
+  before_action :check_verified
   before_action :set_paging_parameters
-  skip_before_action :verify_authenticity_token
 
   private
 
@@ -41,7 +43,7 @@ class BaseApiController < ApplicationController
     @time_zone = if request.headers["Timezone"].present? && ActiveSupport::TimeZone[request.headers["Timezone"].to_s].present?
       request.headers["Timezone"].to_s
     else
-      DEFAULT_TIME_ZONE
+      "UTC"
     end
   end
 
@@ -62,6 +64,11 @@ class BaseApiController < ApplicationController
     if params[:user].present? && !params[:user][:email].blank?
       params[:user][:email] = params[:user][:email].downcase.strip
     end
+  end
+
+  def validate_request_format
+    request.format = :json if request.format.html? # default to json
+    raise ActionController::UnknownFormat unless request.format.json? || request.format.xml? || request.format == Mime::ALL
   end
 
   def logger

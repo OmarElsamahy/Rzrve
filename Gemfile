@@ -121,7 +121,6 @@ group :development, :test do
   gem "rubocop-performance"
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "faker"
   gem "byebug", "~> 11.1"
 end
 
@@ -142,5 +141,10 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "rspec"
+  gem "rspec-rails"
+  gem "faker"
+  gem "shoulda-matchers", "~> 6.0"
+  gem "factory_bot_rails"
+  gem 'parallel_tests'
   gem "simplecov", require: false
 end

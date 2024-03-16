@@ -16,4 +16,11 @@ module ParamsHelper
     result
   end
 
+  def registration_params
+    params.require(:user).permit(:country_code, :phone_number, :avatar, :password, :email, :name, :password_confirmation)
+  end
+
+  def device_params
+    params.require(:device).permit(:fcm_token, :device_type)
+  end
 end

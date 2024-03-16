@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <title>Welcome to rzrv.com, <%= @user.fullname %></title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+      }
+
+      .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+          color: #333;
+          text-align: center;
+          margin-bottom: 20px;
+      }
+
+      p {
+          color: #555;
+          line-height: 1.5;
+          margin-bottom: 15px;
+      }
+
+      .primary-text {
+          color: #007bff;
+      }
+
+      .secondary-text {
+          color: #6c757d;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Welcome to Rzrv, <%= @user.fullname %></h1>
+
+  <p class="primary-text">Hello,</p>
+
+  <p class="secondary-text">You have successfully signed up to rzrv.com,</p>
+
+  <p> Your Verification Code Is:  <h1><%= @code %></h1>
+
+
+  <p class="secondary-text">Thank you!</p>
+</div>
+</body>
+</html>

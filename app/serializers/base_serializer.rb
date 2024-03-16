@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::BaseSerializer
+class BaseSerializer
   include JSONAPI::Serializer
 
   attribute :id do |object|

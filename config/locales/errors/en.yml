@@ -1,0 +1,60 @@
+en:
+  errors:
+    missing_token: Missing Token
+    unverified_user: Unverified User
+    invalid_uuid: Invalid uuid
+    invalid_params: Invalid Parameters
+    missing_params: Missing Parameters
+    not_found: The resource you were looking for could not be found.
+    account_suspended: Your account has been suspended, please contact support for more information.
+    unprocessable_entity: Operation not feasible, the request was well-formed but couldn't be executed due to semantic errors.
+    resource_already_altered: This resource has already been altered
+    delete_restriction_error: "Unable to delete: This record is connected to %{reflection_name}"
+    service_unavailable: The server timed out or refused the connection. Please check your internet connection or try again later.
+    not_acceptable: "The requested format is not supported. Please use an accepted format."
+    method_not_allowed: "The requested method is not allowed for this resource, please check the API documentation for the correct method."
+    email_already_taken: Email is already taken
+    missing_location_params: "Missing Location Parameters"
+    account_not_found: Account Not Found
+    record_not_found: Record Not Found
+    profile_not_found: Person Not Found
+    invalid_token: Invalid Token
+    invalid_credentials: Invalid Credentials
+    unauthorized: Your session has expired, please login again to continue.
+    invalid_country_code: Invalid Country Code
+    invalid_phone_number: Invalid Phone Number
+    invalid_email: Invalid Email
+    email_verification_mismatch: Email is invalid or already verified
+    phone_already_taken: Phone number is already taken
+    expired_code: Code has expired
+    wrong_code: Code is wrong
+    user_not_owner: User is not the owner of the account
+    invalid_starttime: Can't start right now
+    insufficient_funds: There's no sufficient funds inside the wallet
+    cant_deactivate_or_delete: You can't deactivate or delete this account
+    invalid_password: Password is invalid
+    action_unauthorized: You are not authorized to access this page.
+    action_forbidden: You are not allowed to perform this action.
+    access_forbidden: You are not allowed to access this page.
+    can_only_confirm_or_reject: You can only confirm or reject the reservation
+    can_only_pay_or_cancel: You can only complete payment or cancel the reservation
+    can_only_cancel: You can only cancel the reservation
+    can_only_complete: You can only complete this reservation
+    invalid_invitation_code: Invitation code used is invalid
+    change_password: Please change your verification to continue.
+    invalid_current_password: Current Password is Invalid.
+    name_cannot_be_blank: Name cannot be blank.
+    something_went_wrong: An unexpected error occurred while processing your request.
+    must_be_accepted: Must be Accepted
+    already_done_action: is already %{action}ed.
+    unverified_email: Unverified Email
+    invalid_currency: Invalid currency code
+    must_be_an_expert: Must be an expert
+    cant_be_in_the_past: can't be in the past
+    cant_be_in_the_future: can't be in the future
+    end_cant_be_before_start: end date can't be before start date
+    start_date_cannot_be_after_end_date: start date can't be after end date.
+    end_date_cannot_be_before_start_date: end date can't be before start date
+    invalid_lat: Invalid Latitude
+    invalid_lng: Invalid Longitude
+    invalid_lat_lng: Invalid Latitude and Longitude

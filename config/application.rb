@@ -24,27 +24,32 @@ module Rzrv
       require file
     end
 
-    # Configuration for the application, engines, and railties goes here.
-    #
     config.autoload_paths += %W[#{config.root}/config/constants]
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.{rb,yml}")]
+
+    config.i18n.available_locales = AVAILABLE_LOCALES
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = true
+    config.i18n.fallbacks = [:en]
+    config.i18n.fallbacks = (AVAILABLE_LOCALES - [:en]).map { |x| [x, :en] }.to_h
 
     config.active_job.queue_adapter = :sidekiq
+    config.action_mailer.deliver_later_queue_name = "critical"
 
     config.middleware.use RequestLogger
-    config.middleware.use Rack::Attack
-    config.middleware.use ErrorMailerMiddleware
+    config.middleware.use SetLanguage
 
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.perform_caching = false
-    config.action_mailer.default_url_options = {host: Rails.application.credentials.smtp[:host]}
+    # config.action_mailer.default_url_options = {host: Rails.application.credentials.smtp[:host]}
     config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",
       port: 587,
       domain: "smtp.gmail.com",
-      user_name: Rails.application.credentials.smtp[:email],
-      password: Rails.application.credentials.smtp[:password],
+      # user_name: Rails.application.credentials.smtp[:email],
+      # password: Rails.application.credentials.smtp[:password],
       authentication: :plain,
       enable_starttls_auto: true
     }

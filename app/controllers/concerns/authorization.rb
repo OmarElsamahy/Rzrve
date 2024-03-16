@@ -12,6 +12,7 @@ module Authorization
   # #accept access token and set current user or allow guest mode
   def authorize_or_allow_guest
     authorize_request
+    check_verified
   rescue
     logger.debug("Guest Mode Enabled")
   end
@@ -24,6 +25,12 @@ module Authorization
       @current_user = user_object[:user]
       @current_user_device = user_object[:device]
       @device = @current_user_device
+    end
+  end
+
+  def check_verified
+    if @current_user.present? && (!@current_user.email_verified? && !@current_user.phone_number_verified?)
+      raise ExceptionHandler::AuthenticationError.new(error: "unverified_user")
     end
   end
 
