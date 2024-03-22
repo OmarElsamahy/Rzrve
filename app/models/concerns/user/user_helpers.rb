@@ -11,7 +11,7 @@ module User::UserHelpers
 
   def delete_existing_unverified_users
     if email.present?
-      self.class.active.email_unverified.all_except(self).destroy_by("email = :email", email: email)
+      self.class.active.unverified.all_except(self).destroy_by("email = :email", email: email)
       self.class.email_verified.all_except(self).where(unconfirmed_email: email).update_all(unconfirmed_email: nil)
     end
     if phone_number_verified_at.present? && phone_number.present? && country_code.present?
@@ -39,6 +39,14 @@ module User::UserHelpers
     end
 
     nullify_reduntant_unconfirmed_phone_number
+  end
+
+  def set_account_verified_at
+    self.account_verified_at = DateTime.now
+  end
+
+  def is_verified?
+    email_verified_at.present? || phone_number_verified_at.present?
   end
 
   def password_required?

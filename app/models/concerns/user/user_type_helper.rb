@@ -2,7 +2,8 @@
 
 module User::UserTypeHelper
   def admin?
-    instance_of?(Admin)
+    # instance_of?(Admin)
+    false
   end
 
   def user?

@@ -13,13 +13,13 @@ class Api::V1::Auth::SessionsController < BaseApiController
     set_device(@user, device_params)
     @user.update_tracked_fields(request)
     @user.save!
-    response_json(status: :created, data: {user: @user.as_json(options: serializer_options(full_details: true, is_owner: true)), device: @device.as_json,
-                                           extra: {access_token: @user.get_token(@device.id)}})
+    render_response(status: :created, data: { user: @user.as_json(options: serializer_options(full_details: true, is_owner: true)), device: @device.as_json,
+                                              extra: { access_token: @user.get_token(@device.id) } })
   end
 
   def destroy
     @current_user_device&.destroy
-    response_json(message: I18n.t("messages.logged_out"), status: :ok)
+    render_response(message: I18n.t("messages.logged_out"), status: :ok)
   end
 
   def verify_token_authenticity

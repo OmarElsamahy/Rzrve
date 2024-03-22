@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_213858) do
     t.text "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_verified_at"], name: "index_users_on_account_verified_at"
     t.index ["country_code", "phone_number", "status"], name: "index_users_on_country_code_and_phone_number_and_status", unique: true, where: "(status = 0)"
     t.index ["email", "status"], name: "index_users_on_email_and_status", unique: true, where: "((status = 0) AND (email_verified_at IS NOT NULL))"
     t.index ["email"], name: "index_users_on_email", unique: true, where: "(status = 0)"

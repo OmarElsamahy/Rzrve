@@ -8,7 +8,7 @@ class User < ApplicationRecord
   include User::UserVerificationHelper
   include User::UserTypeHelper
 
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :enforce_phone_verification_sms_callback
 
@@ -34,6 +34,9 @@ class User < ApplicationRecord
                                                (phone_number_changed? || country_code_changed?))
                                            }
   before_validation :delete_existing_unverified_users, if: -> { (phone_number_changed? || country_code_changed? || email_changed?) && active_status? }
+
+  before_save :set_account_verified_at, if: -> { email_verified_at_changed? || phone_number_verified_at_changed? }
+
   after_create :send_email_verification_mail, if: -> { email.present? && !email_verified? && active_status? }
   after_save :send_email_verification_mail, if: -> { saved_change_to_unconfirmed_email? && !email_verified? && active_status? }
   after_save :send_phone_verification_sms, if: -> {
@@ -75,6 +78,7 @@ end
 #
 # Indexes
 #
+#  index_users_on_account_verified_at                       (account_verified_at)
 #  index_users_on_country_code_and_phone_number_and_status  (country_code,phone_number,status) UNIQUE WHERE (status = 0)
 #  index_users_on_email                                     (email) UNIQUE WHERE (status = 0)
 #  index_users_on_email_and_status                          (email,status) UNIQUE WHERE ((status = 0) AND (email_verified_at IS NOT NULL))

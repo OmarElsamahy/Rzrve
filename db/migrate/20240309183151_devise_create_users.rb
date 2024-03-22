@@ -45,7 +45,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
     add_index :users, :status
     add_index :users, [:email, :status], unique: true, where: "status = 0 AND email_verified_at IS NOT NULL"
     add_index :users, [:country_code, :phone_number, :status], unique: true, where: "status = 0"
-
+    add_index :users, :account_verified_at
 
   end
 end

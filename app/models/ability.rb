@@ -16,8 +16,7 @@ class Ability
     case controller_namespace
     when "Api::V1"
     when "Api::V1::Auth"
-      can :manage, :sessions
-      can :manage, :passwords
+      can :manage, :all
     end
   end
 end

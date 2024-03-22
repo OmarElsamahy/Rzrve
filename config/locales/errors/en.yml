@@ -16,6 +16,7 @@ en:
     email_already_taken: Email is already taken
     missing_location_params: "Missing Location Parameters"
     account_not_found: Account Not Found
+    account_unverified: Account Has Not Been Verified Yet
     record_not_found: Record Not Found
     profile_not_found: Person Not Found
     invalid_token: Invalid Token

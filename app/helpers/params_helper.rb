@@ -24,6 +24,10 @@ module ParamsHelper
     params.require(:user).permit(:name, :avatar, :country_code, :phone_number)
   end
 
+  def login_params
+    params.require(:user).permit(:country_code, :phone_number, :password, :email)
+  end
+
   def device_params
     params.require(:device).permit(:fcm_token, :device_type)
   end

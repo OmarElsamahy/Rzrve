@@ -42,6 +42,7 @@ two: {}
 #
 # Indexes
 #
+#  index_users_on_account_verified_at                       (account_verified_at)
 #  index_users_on_country_code_and_phone_number_and_status  (country_code,phone_number,status) UNIQUE WHERE (status = 0)
 #  index_users_on_email                                     (email) UNIQUE WHERE (status = 0)
 #  index_users_on_email_and_status                          (email,status) UNIQUE WHERE ((status = 0) AND (email_verified_at IS NOT NULL))
