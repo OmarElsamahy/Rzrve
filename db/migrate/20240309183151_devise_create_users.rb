@@ -2,7 +2,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
   def change
     create_table :users do |t|
       ## Database authenticatable
-      t.string :email, null: false, default: ""
+      t.string :email
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -25,9 +25,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :unconfirmed_email # Only if using reconfirmable
       t.string :unconfirmed_country_code
       t.string :unconfirmed_phone_number
-      t.timestamp :phone_number_verified_at, null: true
-      t.timestamp :email_verified_at, null: true
-      t.timestamp :account_verified_at, null: true
+      t.timestamp :phone_number_verified_at
+      t.timestamp :email_verified_at
+      t.timestamp :account_verified_at
 
       ## Profile
       t.string :name
@@ -40,12 +40,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
     end
 
     # Indexes
-    add_index :users, :email, unique: true, where: "status = 0"
+    add_index :users, :email, unique: true, where: "status = 0 AND email IS NOT NULL"
     add_index :users, :reset_password_token, unique: true
     add_index :users, :status
     add_index :users, [:email, :status], unique: true, where: "status = 0 AND email_verified_at IS NOT NULL"
     add_index :users, [:country_code, :phone_number, :status], unique: true, where: "status = 0"
     add_index :users, :account_verified_at
-
   end
 end

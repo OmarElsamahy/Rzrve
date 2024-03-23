@@ -1,0 +1,6 @@
+en:
+  messages:
+    logged_out: "Logged Out Successfully"
+    deleted_successfully: "Deleted Successfully."
+    profile:
+      delete_account: Account has been deleted successfully.

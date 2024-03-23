@@ -17,8 +17,9 @@ class User::ResetPasswordService
     _, extra_data = User::TokenVerification.new(
       user: @user,
       token: token,
-      verification_type: "email",
-      verification_email: @user.email,
+      verification_type: "phone_number",
+      verification_phone_number: @user.phone_number,
+      verification_country_code: @user.country_code,
       code_scope: "reset_password",
     ).verify_token
     @user.assign_attributes(reset_password_data.merge(extra_data))

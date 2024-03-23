@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_213858) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
+    t.string "email"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_213858) do
     t.index ["account_verified_at"], name: "index_users_on_account_verified_at"
     t.index ["country_code", "phone_number", "status"], name: "index_users_on_country_code_and_phone_number_and_status", unique: true, where: "(status = 0)"
     t.index ["email", "status"], name: "index_users_on_email_and_status", unique: true, where: "((status = 0) AND (email_verified_at IS NOT NULL))"
-    t.index ["email"], name: "index_users_on_email", unique: true, where: "(status = 0)"
+    t.index ["email"], name: "index_users_on_email", unique: true, where: "((status = 0) AND (email IS NOT NULL))"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["status"], name: "index_users_on_status"
   end

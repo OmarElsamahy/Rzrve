@@ -28,4 +28,10 @@ module Api::V1::Auth::PasswordHelper
   def raise_bad_request(error)
     raise ExceptionHandler::BadRequest.new(error: error)
   end
+
+  def validate_current_password_presence
+    if change_password_params[:current_password].blank?
+      raise ExceptionHandler::BadRequest.new(error: "missing_params")
+    end
+  end
 end

@@ -10,14 +10,14 @@ module User::UserHelpers
   end
 
   def delete_existing_unverified_users
-    if email.present?
-      self.class.active.unverified.all_except(self).destroy_by("email = :email", email: email)
-      self.class.email_verified.all_except(self).where(unconfirmed_email: email).update_all(unconfirmed_email: nil)
-    end
-    if phone_number_verified_at.present? && phone_number.present? && country_code.present?
-      self.class.email_verified.all_except(self).where(unconfirmed_phone_number: phone_number,
-        unconfirmed_country_code: country_code)
-        .update_all(unconfirmed_phone_number: nil, unconfirmed_country_code: nil)
+    if phone_number.present? && country_code.present?
+      self.class.active.unverified.all_except(self)
+        .where("(country_code = :country_code AND phone_number = :phone_number)",
+               country_code: self.country_code, phone_number: self.phone_number).destroy_all
+
+      self.class.verified.all_except(self).where(unconfirmed_phone_number: set_phone_number,
+                                                 unconfirmed_country_code: country_code)
+          .update_all(unconfirmed_phone_number: nil, unconfirmed_country_code: nil)
     end
   end
 
@@ -46,10 +46,14 @@ module User::UserHelpers
   end
 
   def is_verified?
-    email_verified_at.present? || phone_number_verified_at.present?
+    account_verified_at.present?
   end
 
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+
+  def email_required?
+    false
   end
 end

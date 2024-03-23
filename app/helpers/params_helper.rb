@@ -28,6 +28,22 @@ module ParamsHelper
     params.require(:user).permit(:country_code, :phone_number, :password, :email)
   end
 
+  def password_params
+    params.require(:user).permit(:country_code, :phone_number, :email)
+  end
+
+  def reset_password_params
+    params.require(:user).permit(:email, :country_code, :phone_number, :password, :password_confirmation)
+  end
+
+  def change_password_params
+    params.require(:user).permit(:current_password, :password, :password_confirmation)
+  end
+
+  def change_phone_params
+    params.require(:user).permit(:country_code, :phone_number)
+  end
+
   def device_params
     params.require(:device).permit(:fcm_token, :device_type)
   end
