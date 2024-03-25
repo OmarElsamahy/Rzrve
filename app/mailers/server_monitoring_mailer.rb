@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ServerMonitoringMailer < ApplicationMailer
   def server_error(error_details)
     @error_details = error_details

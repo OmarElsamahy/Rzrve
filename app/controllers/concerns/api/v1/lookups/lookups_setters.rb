@@ -2,5 +2,4 @@
 
 module Api::V1::Lookups::LookupsSetters
   extend ActiveSupport::Concern
-
 end

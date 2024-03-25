@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SystemConfiguration < ApplicationRecord
   include SystemCacheInvalidationHelper
 
@@ -7,7 +9,6 @@ class SystemConfiguration < ApplicationRecord
 
   validates :key, :value, presence: true
   validates :key, uniqueness: true
-
 end
 
 # == Schema Information

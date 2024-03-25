@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "logger"
 require "active_support/broadcast_logger"
 require "rainbow/refinement"

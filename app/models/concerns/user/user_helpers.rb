@@ -13,11 +13,11 @@ module User::UserHelpers
     if phone_number.present? && country_code.present?
       self.class.active.unverified.all_except(self)
         .where("(country_code = :country_code AND phone_number = :phone_number)",
-               country_code: self.country_code, phone_number: self.phone_number).destroy_all
+          country_code: country_code, phone_number: phone_number).destroy_all
 
       self.class.verified.all_except(self).where(unconfirmed_phone_number: set_phone_number,
-                                                 unconfirmed_country_code: country_code)
-          .update_all(unconfirmed_phone_number: nil, unconfirmed_country_code: nil)
+        unconfirmed_country_code: country_code)
+        .update_all(unconfirmed_phone_number: nil, unconfirmed_country_code: nil)
     end
   end
 

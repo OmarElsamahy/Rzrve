@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_15_213858) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_25_022300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +59,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_213858) do
     t.index ["email"], name: "index_users_on_email", unique: true, where: "((status = 0) AND (email IS NOT NULL))"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["status"], name: "index_users_on_status"
+  end
+
+  create_table "vendors", force: :cascade do |t|
+    t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.string "verification_code"
+    t.datetime "verification_code_sent_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "unconfirmed_email"
+    t.string "unconfirmed_country_code"
+    t.string "unconfirmed_phone_number"
+    t.datetime "phone_number_verified_at", precision: nil
+    t.datetime "email_verified_at", precision: nil
+    t.datetime "account_verified_at", precision: nil
+    t.string "name"
+    t.integer "status"
+    t.integer "profile_status"
+    t.string "country_code"
+    t.string "phone_number"
+    t.text "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_verified_at"], name: "index_vendors_on_account_verified_at"
+    t.index ["country_code", "phone_number", "status"], name: "index_vendors_on_country_code_and_phone_number_and_status", unique: true, where: "(status = 0)"
+    t.index ["email", "status"], name: "index_vendors_on_email_and_status", unique: true, where: "((status = 0) AND (email_verified_at IS NOT NULL))"
+    t.index ["email"], name: "index_vendors_on_email", unique: true, where: "((status = 0) AND (email IS NOT NULL))"
+    t.index ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true
+    t.index ["status"], name: "index_vendors_on_status"
   end
 
 end

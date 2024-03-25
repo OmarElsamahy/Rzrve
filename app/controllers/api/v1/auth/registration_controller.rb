@@ -18,10 +18,10 @@ class Api::V1::Auth::RegistrationController < BaseApiController
       set_device(@user, device_params)
       @user.save!
     end
-    render_response(status: :created, data: { user: @user.reload.as_json(options: serializer_options(full_details: true, is_owner: true)),
+    render_response(status: :created, data: {user: @user.reload.as_json(options: serializer_options(full_details: true, is_owner: true)),
                                              device: @device.as_json,
                                              extra: {
-                      access_token: @user.get_token(@device.id),
-                    } })
+                                               access_token: @user.get_token(@device.id)
+                                             }})
   end
 end

@@ -1,33 +1,33 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::V1::Auth::RegistrationController, type: :controller do
-  describe 'POST #create' do
-    context 'with valid params' do
+  describe "POST #create" do
+    context "with valid params" do
       let(:valid_params) do
         {
           user: {
-            country_code: '1',
-            phone_number: '1234567890',
-            avatar: 'avatar_url',
-            password: 'password123',
-            email: 'test@example.com',
-            name: 'Test User',
-            password_confirmation: 'password123'
+            country_code: "1",
+            phone_number: "1234567890",
+            avatar: "avatar_url",
+            password: "password123",
+            email: "test@example.com",
+            name: "Test User",
+            password_confirmation: "password123"
           },
           device: {
-            fcm_token: 'fcm_token',
+            fcm_token: "fcm_token",
             device_type: :android
           }
         }
       end
 
-      it 'creates a new user and device' do
+      it "creates a new user and device" do
         expect {
           post :create, params: valid_params
         }.to change(User, :count).by(1)
-         .and change(Device, :count).by(1)
+          .and change(Device, :count).by(1)
 
         expect(response).to have_http_status(:created)
 
@@ -43,7 +43,7 @@ RSpec.describe Api::V1::Auth::RegistrationController, type: :controller do
         expect(device.device_type).to eq(valid_params[:device][:device_type].to_s)
         # Add more expectations for other device attributes
       end
-      it 'returns the expected response body' do
+      it "returns the expected response body" do
         post :create, params: valid_params
         expect(response).to have_http_status(:created)
 
@@ -57,7 +57,7 @@ RSpec.describe Api::V1::Auth::RegistrationController, type: :controller do
       end
     end
 
-    context 'with invalid params' do
+    context "with invalid params" do
       let(:invalid_params) do
         {
           user: {
@@ -69,7 +69,7 @@ RSpec.describe Api::V1::Auth::RegistrationController, type: :controller do
         }
       end
 
-      it 'does not create a new user and device' do
+      it "does not create a new user and device" do
         expect {
           post :create, params: invalid_params
         }.not_to change(User, :count)
@@ -80,14 +80,13 @@ RSpec.describe Api::V1::Auth::RegistrationController, type: :controller do
   end
 end
 
-
 def expected_response_body(user, device)
   {
-    message: 'Success',
+    message: "Success",
     data: {
       user: {
         id: user.id,
-        user_type: 'user',
+        user_type: "user",
         name: user.name,
         email: user.email,
         status: user.status,
@@ -96,14 +95,14 @@ def expected_response_body(user, device)
       },
       device: {
         id: device.id,
-        authenticable_type: 'User',
+        authenticable_type: "User",
         authenticable_id: user.id,
         fcm_token: device.fcm_token,
         device_type: device.device_type,
         logged_out: device.logged_out,
-        locale: 'en',
-        created_at: device.created_at.strftime('%Y-%m-%dT%H:%M:%S.%LZ'),
-        updated_at: device.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
+        locale: "en",
+        created_at: device.created_at.strftime("%Y-%m-%dT%H:%M:%S.%LZ"),
+        updated_at: device.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
       },
       extra: {
         access_token: user.get_token(device.id)

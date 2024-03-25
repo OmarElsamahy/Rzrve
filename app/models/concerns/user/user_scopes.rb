@@ -5,7 +5,7 @@ module User::UserScopes
 
   included do
     enable_attribute_scopes
-    
+
     scope :active, -> { where(status: :active) }
     scope :available_for_login, -> { where(status: [:active, :suspended]) }
     scope :all_except, ->(users) { where.not(id: users) }

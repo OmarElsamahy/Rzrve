@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RequestLogger
   def initialize(app, formatting_char = "=")
     @app = app

@@ -20,7 +20,7 @@ class User::ResetPasswordService
       verification_type: "phone_number",
       verification_phone_number: @user.phone_number,
       verification_country_code: @user.country_code,
-      code_scope: "reset_password",
+      code_scope: "reset_password"
     ).verify_token
     @user.assign_attributes(reset_password_data.merge(extra_data))
   end
@@ -28,7 +28,7 @@ class User::ResetPasswordService
   def reset_password_data
     {
       reset_password_token: nil,
-      reset_password_sent_at: nil,
+      reset_password_sent_at: nil
     }
   end
 end

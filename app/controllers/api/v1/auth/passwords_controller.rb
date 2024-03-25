@@ -21,24 +21,24 @@ class Api::V1::Auth::PasswordsController < BaseApiController
 
   def send_reset_password_info
     @user.send_reset_password_email
-    data = Rails.env.development? ? { reset_password_token: @user.reset_password_token } : {}
+    data = Rails.env.development? ? {reset_password_token: @user.reset_password_token} : {}
     render_response(status: :ok, data: data)
   end
 
   def verify_otp
     token = User::OtpService.new(user: @user, code_scope: "reset_password", otp: params[:verification_code]).verify_otp
     @user.save!
-    render_response(data: { token: token })
+    render_response(data: {token: token})
   end
 
   def reset_password
     @user = User::ResetPasswordService.new(
-      user: @user,
+      user: @user
     ).reset_password(
       password: reset_password_params[:password],
       password_confirmation: reset_password_params[:password_confirmation],
       token: request.headers["verification-token"].to_s,
-      verify: true,
+      verify: true
     )
     return raise ActiveRecord::RecordInvalid.new(@user) if @user.errors.any?
     ActiveRecord::Base.transaction do
@@ -46,18 +46,18 @@ class Api::V1::Auth::PasswordsController < BaseApiController
       @user.save!
       @device.logout_other_devices
     end
-    render_response(status: :ok, data: { user: @user.as_json(options: serializer_options(full_details: true, is_owner: true)),
-                                         device: @device.as_json,
-                                         extra: { access_token: @user.get_token(@device.id) } })
+    render_response(status: :ok, data: {user: @user.as_json(options: serializer_options(full_details: true, is_owner: true)),
+                                        device: @device.as_json,
+                                        extra: {access_token: @user.get_token(@device.id)}})
   end
 
   def change_password
     @user = User::ResetPasswordService.new(
-      user: @current_user,
+      user: @current_user
     ).reset_password(
       password: change_password_params[:password],
       password_confirmation: change_password_params[:password_confirmation],
-      verify: false,
+      verify: false
     )
     render_response
   end

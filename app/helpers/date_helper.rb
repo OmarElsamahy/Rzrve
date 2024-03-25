@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DateHelper
   INTERVAL_TYPES = %w[week month year]
 

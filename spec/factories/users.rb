@@ -16,8 +16,8 @@ FactoryBot.define do
     end
 
     trait :verified do
-      phone_number_verified_at {DateTime.current}
-      account_verified_at {DateTime.current}
+      phone_number_verified_at { DateTime.current }
+      account_verified_at { DateTime.current }
     end
   end
 end

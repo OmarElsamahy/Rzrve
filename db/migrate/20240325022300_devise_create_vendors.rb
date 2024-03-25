@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class DeviseCreateUsers < ActiveRecord::Migration[7.1]
+class DeviseCreateVendors < ActiveRecord::Migration[7.1]
   def change
-    create_table :users do |t|
+    create_table :vendors do |t|
       ## Database authenticatable
       t.string :email
       t.string :encrypted_password, null: false, default: ""
@@ -34,6 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       ## Profile
       t.string :name
       t.integer :status
+      t.integer :profile_status
       t.string :country_code
       t.string :phone_number
       t.text :avatar
@@ -42,11 +43,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
     end
 
     # Indexes
-    add_index :users, :email, unique: true, where: "status = 0 AND email IS NOT NULL"
-    add_index :users, :reset_password_token, unique: true
-    add_index :users, :status
-    add_index :users, [:email, :status], unique: true, where: "status = 0 AND email_verified_at IS NOT NULL"
-    add_index :users, [:country_code, :phone_number, :status], unique: true, where: "status = 0"
-    add_index :users, :account_verified_at
+    add_index :vendors, :email, unique: true, where: "status = 0 AND email IS NOT NULL"
+    add_index :vendors, :reset_password_token, unique: true
+    add_index :vendors, :status
+    add_index :vendors, [:email, :status], unique: true, where: "status = 0 AND email_verified_at IS NOT NULL"
+    add_index :vendors, [:country_code, :phone_number, :status], unique: true, where: "status = 0"
+    add_index :vendors, :account_verified_at
   end
 end

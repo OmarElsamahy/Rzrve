@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User < ApplicationRecord
+class Vendor < ApplicationRecord
   include User::UserHelpers
   include User::UserScopes
   include User::ResetPasswordHelper
@@ -13,6 +13,7 @@ class User < ApplicationRecord
   attr_accessor :enforce_phone_verification_sms_callback
 
   enum :status, {active: 0, deactivated: 1, deleted: 2, suspended: 3}, suffix: :status, default: :active, validate: true
+  enum :profile_status, {pending: 0, accepted: 1, declined: 2}, suffix: :profile_status, default: :pending, validate: true
 
   has_many :devices, as: :authenticable, dependent: :destroy
 
@@ -54,7 +55,7 @@ end
 
 # == Schema Information
 #
-# Table name: users
+# Table name: vendors
 #
 #  id                        :bigint           not null, primary key
 #  account_verified_at       :datetime
@@ -70,6 +71,7 @@ end
 #  name                      :string
 #  phone_number              :string
 #  phone_number_verified_at  :datetime
+#  profile_status            :integer
 #  reset_password_sent_at    :datetime
 #  reset_password_token      :string
 #  sign_in_count             :integer          default(0), not null
@@ -84,10 +86,10 @@ end
 #
 # Indexes
 #
-#  index_users_on_account_verified_at                       (account_verified_at)
-#  index_users_on_country_code_and_phone_number_and_status  (country_code,phone_number,status) UNIQUE WHERE (status = 0)
-#  index_users_on_email                                     (email) UNIQUE WHERE ((status = 0) AND (email IS NOT NULL))
-#  index_users_on_email_and_status                          (email,status) UNIQUE WHERE ((status = 0) AND (email_verified_at IS NOT NULL))
-#  index_users_on_reset_password_token                      (reset_password_token) UNIQUE
-#  index_users_on_status                                    (status)
+#  index_vendors_on_account_verified_at                       (account_verified_at)
+#  index_vendors_on_country_code_and_phone_number_and_status  (country_code,phone_number,status) UNIQUE WHERE (status = 0)
+#  index_vendors_on_email                                     (email) UNIQUE WHERE ((status = 0) AND (email IS NOT NULL))
+#  index_vendors_on_email_and_status                          (email,status) UNIQUE WHERE ((status = 0) AND (email_verified_at IS NOT NULL))
+#  index_vendors_on_reset_password_token                      (reset_password_token) UNIQUE
+#  index_vendors_on_status                                    (status)
 #

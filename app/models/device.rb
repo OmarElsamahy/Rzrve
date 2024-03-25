@@ -3,7 +3,7 @@
 class Device < ApplicationRecord
   belongs_to :authenticable, polymorphic: true
   validates :fcm_token, presence: true
-  enum :device_type, { unknown: 0, ios: 1, android: 2, web: 3 }, default: :unknown, validate: true
+  enum :device_type, {unknown: 0, ios: 1, android: 2, web: 3}, default: :unknown, validate: true
   scope :all_except, ->(device) { where.not(id: device) }
 
   def logout_other_devices

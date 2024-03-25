@@ -11,7 +11,7 @@ class Api::V1::Auth::AuthenticateUser
 
   def call
     {
-      user: user,
+      user: user
     }
   end
 

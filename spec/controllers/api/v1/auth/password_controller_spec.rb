@@ -3,8 +3,6 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Auth::PasswordsController, type: :controller do
-
-
   def create_reset_password_token(user)
     user.send_reset_password_email
     user.reset_password_token

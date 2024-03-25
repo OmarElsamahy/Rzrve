@@ -11,11 +11,11 @@ RSpec.describe Api::V1::Auth::SessionsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new session" do
-        post :create, params: { user_type: "user",
-                                user: { phone_number: user.phone_number,
-                                        country_code: user.country_code,
-                                        password: user.password },
-                                device: { fcm_token: device.fcm_token, device_type: device.device_type } }
+        post :create, params: {user_type: "user",
+                               user: {phone_number: user.phone_number,
+                                      country_code: user.country_code,
+                                      password: user.password},
+                               device: {fcm_token: device.fcm_token, device_type: device.device_type}}
         expect(response).to have_http_status(:created)
         expect(response.body).to include(user.phone_number)
         token = JSON.parse(response.body)["data"]["extra"]["access_token"]
@@ -27,7 +27,7 @@ RSpec.describe Api::V1::Auth::SessionsController, type: :controller do
 
     context "with invalid params" do
       it "returns an error message" do
-        post :create, params: { user_type: "user", user: { email: "invalid_email@example.com", password: "invalid_password" }, device: { fcm_token: device.fcm_token, device_type: device.device_type } }
+        post :create, params: {user_type: "user", user: {email: "invalid_email@example.com", password: "invalid_password"}, device: {fcm_token: device.fcm_token, device_type: device.device_type}}
         expect(response).to have_http_status(:not_found)
         expect(response.body).to include("Account Not Found")
       end
@@ -58,7 +58,7 @@ RSpec.describe Api::V1::Auth::SessionsController, type: :controller do
         get :verify_token_authenticity
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to include("Invalid Token")
-       end
+      end
     end
   end
 end

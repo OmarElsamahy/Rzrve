@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SoftDeletionHelper
   extend ActiveSupport::Concern
 

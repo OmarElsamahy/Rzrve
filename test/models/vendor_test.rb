@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class UserTest < ActiveSupport::TestCase
+class VendorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
@@ -10,7 +10,7 @@ end
 
 # == Schema Information
 #
-# Table name: users
+# Table name: vendors
 #
 #  id                        :bigint           not null, primary key
 #  account_verified_at       :datetime
@@ -26,6 +26,7 @@ end
 #  name                      :string
 #  phone_number              :string
 #  phone_number_verified_at  :datetime
+#  profile_status            :integer
 #  reset_password_sent_at    :datetime
 #  reset_password_token      :string
 #  sign_in_count             :integer          default(0), not null
@@ -40,10 +41,10 @@ end
 #
 # Indexes
 #
-#  index_users_on_account_verified_at                       (account_verified_at)
-#  index_users_on_country_code_and_phone_number_and_status  (country_code,phone_number,status) UNIQUE WHERE (status = 0)
-#  index_users_on_email                                     (email) UNIQUE WHERE ((status = 0) AND (email IS NOT NULL))
-#  index_users_on_email_and_status                          (email,status) UNIQUE WHERE ((status = 0) AND (email_verified_at IS NOT NULL))
-#  index_users_on_reset_password_token                      (reset_password_token) UNIQUE
-#  index_users_on_status                                    (status)
+#  index_vendors_on_account_verified_at                       (account_verified_at)
+#  index_vendors_on_country_code_and_phone_number_and_status  (country_code,phone_number,status) UNIQUE WHERE (status = 0)
+#  index_vendors_on_email                                     (email) UNIQUE WHERE ((status = 0) AND (email IS NOT NULL))
+#  index_vendors_on_email_and_status                          (email,status) UNIQUE WHERE ((status = 0) AND (email_verified_at IS NOT NULL))
+#  index_vendors_on_reset_password_token                      (reset_password_token) UNIQUE
+#  index_vendors_on_status                                    (status)
 #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Usage: rake deploy
 # Usage: rake env deploy
 desc "Deploy to the specified environment"

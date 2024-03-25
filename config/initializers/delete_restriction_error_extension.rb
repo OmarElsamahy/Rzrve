@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveRecord
   class DeleteRestrictionError < ActiveRecordError
     attr_accessor :reflection_name, :humanized_reflection_name
