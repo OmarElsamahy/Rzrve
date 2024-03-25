@@ -26,7 +26,10 @@ class User < ApplicationRecord
                        format: { with: PASSWORD_REGEX, allow_blank: true, message: I18n.t("errors.invalid_password") }
   validates_confirmation_of :password, if: :password_required?
 
-  validates :phone_number, uniqueness: { scope: :country_code, conditions: -> { where(status: :active) }, allow_blank: true, if: :active_status? }
+  validates :phone_number,
+            uniqueness: { scope: :country_code, conditions: -> { where(status: :active) }, if: :active_status? },
+            presence: true
+  validates :country_code, presence: true
   validate :valid_unconfirmed_phone_number, if: -> {
                                               unconfirmed_country_code.present? && unconfirmed_phone_number.present? &&
                                                 (unconfirmed_country_code_changed? || unconfirmed_phone_number_changed?)

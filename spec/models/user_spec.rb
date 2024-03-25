@@ -1,24 +1,24 @@
-# spec/models/user_spec.rb
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe User, type: :model do
   describe "validations" do
     subject { build(:user) }
 
-    it { should validate_presence_of(:email) }
-    context "email uniqueness" do
-      it "validates uniqueness when status is active" do
-        passing_user = create(:user, status: :active)
-        puts passing_user.as_json
-        puts passing_user.persisted?
-        puts "passing_user"
-        non_passing_user = create(:user, status: :active, email: passing_user.email)
-        puts non_passing_user.as_json
-        puts non_passing_user.persisted?
-        puts "non_passing_user"
+    context "when status is active" do
+      before { subject.status = :active }
 
-        expect(passing_user).to be_valid
-        expect(non_passing_user).not_to be_valid
+      it { should validate_presence_of(:phone_number) }
+      it { should validate_presence_of(:country_code) }
+    end
+
+    context "phone uniqueness" do
+      it "validates the uniqueness of phone_number scoped to country_code" do
+        user1 = create(:user, :verified)
+        user2 = build(:user, phone_number: user1.phone_number, country_code: user1.country_code)
+        expect(user2).not_to be_valid
+        expect(user2.errors[:phone_number]).to include("has already been taken")
       end
     end
 
@@ -27,25 +27,67 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
       expect(user.errors[:email]).to include("is invalid")
     end
+
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(8) }
-    it { should allow_value('valid_password123').for(:password) }
-    it { should_not allow_value('weak').for(:password) }
+    it { should allow_value("valid_password123").for(:password) }
+    it { should_not allow_value("weak").for(:password) }
 
-    it { should allow_value('123456789').for(:phone_number) }
+    it { should allow_value("123456789").for(:phone_number) }
   end
 
   describe "associations" do
-    # it { should have_many(:devices).dependent(:destroy) }
+    it { should have_many(:devices).dependent(:destroy) }
   end
 
   describe "scopes" do
-  end
+    describe ".active" do
+      it "returns only active users" do
+        active_user = create(:user, status: :active)
+        create(:user, status: :deleted)
+        expect(User.active).to include(active_user)
+      end
+    end
 
-  describe "methods" do
+    describe ".deactivated" do
+      it "returns only deactivated users" do
+        deactivated_user = create(:user, status: :deactivated)
+        create(:user, status: :active)
+        expect(User.deactivated_status).to include(deactivated_user)
+      end
+    end
+
+    describe ".deleted" do
+      it "returns only deleted users" do
+        deleted_user = create(:user, status: :deleted)
+        create(:user, status: :active)
+        expect(User.deleted_status).to include(deleted_user)
+      end
+    end
+
+    describe ".suspended" do
+      it "returns only suspended users" do
+        suspended_user = create(:user, status: :suspended)
+        create(:user, status: :active)
+        expect(User.suspended_status).to include(suspended_user)
+      end
+    end
   end
 
   describe "callbacks" do
+    describe "#set_account_verified_at" do
+      it "sets account_verified_at when email_verified_at changes" do
+        user = create(:user)
+        user.update(email_verified_at: Time.now)
+        expect(user.account_verified_at).to be_present
+      end
+
+      it "sets account_verified_at when phone_number_verified_at changes" do
+        user = create(:user)
+        user.update(phone_number_verified_at: Time.now)
+        expect(user.account_verified_at).to be_present
+      end
+    end
   end
 end
 

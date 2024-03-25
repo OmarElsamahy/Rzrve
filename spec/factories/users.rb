@@ -1,13 +1,24 @@
-# spec/factories/users.rb
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password { "Testtest1@" }
+    password_confirmation { "Testtest1@" } # Ensure password_confirmation matches password
     status { :active }
     country_code { "+20" }
     phone_number { "10" + Faker::Number.number(digits: 8).to_s }
     name { Faker::Name.name }
 
+    trait :with_invalid_password do
+      password { "weak" } # For testing invalid password
+      password_confirmation { "weak" } # Ensure password_confirmation matches password
+    end
+
+    trait :verified do
+      phone_number_verified_at {DateTime.current}
+      account_verified_at {DateTime.current}
+    end
   end
 end
 

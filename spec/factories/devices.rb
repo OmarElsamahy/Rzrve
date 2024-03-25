@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :device do
-    authenticable { create(:employee) }
+    authenticable { create(:user) }
     device_type { :android }
     fcm_token { "test_token" }
     locale { "en" }
