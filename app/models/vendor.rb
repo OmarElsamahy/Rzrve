@@ -16,6 +16,8 @@ class Vendor < ApplicationRecord
   enum :profile_status, {pending: 0, accepted: 1, declined: 2}, suffix: :profile_status, default: :pending, validate: true
 
   has_many :devices, as: :authenticable, dependent: :destroy
+  has_many :venues, dependent: :destroy
+  has_many :media, as: :mediable, dependent: :destroy
 
   validates :email,
     allow_blank: true,

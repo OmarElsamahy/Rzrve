@@ -59,3 +59,4 @@ en:
     invalid_lat: Invalid Latitude
     invalid_lng: Invalid Longitude
     invalid_lat_lng: Invalid Latitude and Longitude
+    incorrect_day: Must be a valid day of the week
