@@ -2,11 +2,23 @@
 
 class Venue < ApplicationRecord
 
+  scope :filter_by_vendor, -> (vendor_id){
+    where(vendor_id: vendor_id) if vendor_id.present?
+  }
+
+  scope :in_city, -> (city_id){
+    where(city_id: city_id) if city_id.present?
+  }
+
   has_one :address, as: :addressable, dependent: :destroy
   has_many :courts, dependent: :destroy
 
   belongs_to :vendor
   belongs_to :city
+
+  accepts_nested_attributes_for :address
+
+  validates_associated :address
 
 end
 

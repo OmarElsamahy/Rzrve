@@ -16,6 +16,7 @@ class Ability
     case controller_namespace
     when "Api::V1"
       can :read, :vendors
+      can :read, :venues
       can :read, :countries
       can :read, :cities
     when "Api::V1::Auth"

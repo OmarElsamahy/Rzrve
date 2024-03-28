@@ -3,6 +3,8 @@
 class Country < ApplicationRecord
   include LookupsHelper
   validates :lookup_key, uniqueness: { allow_blank: true }
+
+  has_many :cities, dependent: :destroy
 end
 
 # == Schema Information

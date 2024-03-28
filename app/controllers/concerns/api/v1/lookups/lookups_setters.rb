@@ -7,6 +7,10 @@ module Api::V1::Lookups::LookupsSetters
     @current_vendor = Vendor.find(params[:vendor_id])
   end
 
+  def set_current_venue
+    @current_venue = Venue.find(params[:venue_id])
+  end
+
   def set_current_city
     @current_city = City.find(params[:city_id])
   end
