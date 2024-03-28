@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 class Country < ApplicationRecord
-  extend Mobility
   include LookupsHelper
-
-  translates :name, type: :string
-  has_many :journeys, dependent: :restrict_with_exception
-  has_many :users, dependent: :restrict_with_exception
   validates :lookup_key, uniqueness: {allow_blank: true}
 end
 

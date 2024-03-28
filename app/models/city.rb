@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
 class City < ApplicationRecord
-  extend Mobility
   include LookupsHelper
 
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) if country_id.present? }
 
   belongs_to :country
-  translates :name, type: :string
-  has_many :journeys, dependent: :restrict_with_exception
 
   validates :lookup_key, uniqueness: { allow_blank: true }
 end

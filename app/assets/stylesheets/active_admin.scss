@@ -1,17 +1,100 @@
-// Sass variable overrides must be declared before loading up Active Admin's styles.
-//
-// To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
-// Active Admin source.
-//
-// For example, to change the sidebar width:
-// $sidebar-width: 242px;
+$primary-color: #FF7900;
 
-// Active Admin's got SASS!
+@import "arctic_admin/base";
 @import "active_admin/mixins";
-@import "active_admin/base";
+@import "active_admin/searchable_select";
+@import 'activeadmin_addons/all';
 
-// Overriding any non-variable Sass must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $primary-color !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.icon_sized_image {
+  width: 50px;
+  height: 50px;
+}
+
+
+.small_sized_image {
+  width: 70px;
+  height: 70px;
+}
+
+.show_img_size {
+  //width: 200px;
+  height: 150px;
+  display: block;
+  // margin-left: auto;
+  // margin-right: auto;
+}
+
+.image_upload_progress_bar {
+  width: 0%;
+  height: 20px;
+  background-color: #78b13f;
+  text-align: center;
+  /* To center it horizontally (if you want) */
+  line-height: 20px;
+  /* To center it vertically */
+  color: white;
+  margin-left: 0%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  display: none;
+}
+
+#myProgress {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.scopes .table_tools_button {
+  margin-top: 5px;
+  border: 1px solid;
+}
+
+#fr-logo {
+  visibility: hidden;
+}
+
+.scopes .table_tools_button {
+  margin-top: 5px;
+  border: 1px solid;
+}
+
+.fragments-group {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-direction: column;
+}
+
+.fragments-group li {
+  width: 100%;
+}
+
+.fragment label {
+  margin-top: 5px;
+  padding-bottom: 15px !important;
+  width: 10%;
+  float: left;
+  padding-right: 10px !important;
+}
+
+.errors li {
+  background-color: #dc4747;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+body.index #sidebar {
+  position: absolute !important;
+}
