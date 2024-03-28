@@ -70,6 +70,7 @@ gem "activeadmin_addons"
 gem "activeadmin_dynamic_fields"
 gem "activeadmin-searchable_select"
 gem "arctic_admin"
+gem 'request_store'
 gem "formtastic", "~> 4.0"
 gem "select2-rails", "~> 4.0"
 # active admin html editor

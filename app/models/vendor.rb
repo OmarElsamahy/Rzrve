@@ -2,12 +2,12 @@
 
 class Vendor < ApplicationRecord
   include User::UserHelpers
-  include User::UserScopes
   include User::ResetPasswordHelper
   include User::AuthenticationHelper
   include User::UserVerificationHelper
   include User::UserTypeHelper
-
+  include Vendor::VendorScopes
+  
   devise :database_authenticatable, :recoverable, :rememberable, :trackable
 
   attr_accessor :enforce_phone_verification_sms_callback

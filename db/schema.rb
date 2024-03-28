@@ -202,6 +202,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_014755) do
 
   create_table "venues", force: :cascade do |t|
     t.bigint "vendor_id"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_venues_on_city_id"
     t.index ["vendor_id"], name: "index_venues_on_vendor_id"
   end
 
@@ -210,5 +214,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_014755) do
   add_foreign_key "cities", "countries"
   add_foreign_key "court_availabilities", "courts"
   add_foreign_key "courts", "venues"
+  add_foreign_key "venues", "cities"
   add_foreign_key "venues", "vendors"
 end

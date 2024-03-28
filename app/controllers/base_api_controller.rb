@@ -15,6 +15,7 @@ class BaseApiController < ApplicationController
   before_action :authorize_request
   before_action :authorize_action!
   before_action :check_verified
+  before_action :set_city
   before_action :set_paging_parameters
 
   private
@@ -64,6 +65,10 @@ class BaseApiController < ApplicationController
     if params[:user].present? && !params[:user][:email].blank?
       params[:user][:email] = params[:user][:email].downcase.strip
     end
+  end
+
+  def set_city
+    RequestStore.store[:current_city_id] = request.headers["City"].to_i
   end
 
   def validate_request_format

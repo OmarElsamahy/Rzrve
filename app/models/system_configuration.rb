@@ -2,9 +2,9 @@
 
 class SystemConfiguration < ApplicationRecord
   include SystemCacheInvalidationHelper
+  include SystemConfigurationCacheHelper
 
   KEYS_WITH_NUMERIC_VALUES_HASH = {
-    sync_interval_mins: true
   }.freeze
 
   validates :key, :value, presence: true

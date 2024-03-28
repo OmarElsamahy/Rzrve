@@ -589,6 +589,7 @@ DEPENDENCIES
   rails-i18n
   rainbow
   redis
+  request_store
   rspec
   rspec-rails
   rubocop

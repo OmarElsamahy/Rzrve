@@ -2,7 +2,7 @@
 
 class Country < ApplicationRecord
   include LookupsHelper
-  validates :lookup_key, uniqueness: {allow_blank: true}
+  validates :lookup_key, uniqueness: { allow_blank: true }
 end
 
 # == Schema Information

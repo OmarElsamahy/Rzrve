@@ -15,6 +15,9 @@ class Ability
     user_class = user.class.name
     case controller_namespace
     when "Api::V1"
+      can :read, :vendors
+      can :read, :countries
+      can :read, :cities
     when "Api::V1::Auth"
       can :manage, :all
     end
